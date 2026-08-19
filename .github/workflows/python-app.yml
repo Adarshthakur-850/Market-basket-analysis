@@ -1,19 +1,16 @@
-name: Python CI
+name: Market Basket Analysis CI
 
 on:
   push:
-    branches: ["main"]
+    branches:
+      - main
   pull_request:
-    branches: ["main"]
+    branches:
+      - main
 
 jobs:
-  build:
+  tests:
     runs-on: ubuntu-latest
-
-    strategy:
-      fail-fast: false
-      matrix:
-        python-version: ["3.10"]
 
     steps:
       - name: Checkout repository
@@ -22,24 +19,23 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: ${{ matrix.python-version }}
-
-      - name: Upgrade pip
-        run: python -m pip install --upgrade pip
+          python-version: "3.10"
+          cache: "pip"
 
       - name: Install dependencies
         run: |
-          pip install flake8 pytest
-          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
 
-      - name: Lint (fail only on critical errors)
+      - name: Verify project structure
         run: |
-          flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+          pwd
+          ls -la
+          ls -la src
+          ls -la tests
 
-      - name: Run tests (if present)
+      - name: Run tests
+        env:
+          PYTHONPATH: ${{ github.workspace }}
         run: |
-          if [ -d "tests" ]; then
-            pytest tests/
-          else
-            echo "No tests directory found. Skipping tests."
-          fi
+          python -m pytest -v

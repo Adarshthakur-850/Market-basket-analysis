@@ -35,6 +35,11 @@ The project is designed as an end-to-end analytical pipeline rather than a singl
 
 The repository is structured so that the analytical components can be used independently or executed together through the main pipeline.
 
+<img width="1341" height="1036" alt="Screenshot 2026-05-22 001249" src="https://github.com/user-attachments/assets/80db4c81-7307-44c3-ab3a-168e8a03bc47" />
+
+<img width="1341" height="970" alt="Screenshot 2026-05-22 001303" src="https://github.com/user-attachments/assets/cbd9b047-fd13-4284-9c0d-f267b2d1cea0" />
+
+
 ---
 
 ## 🎯 Problem Statement
